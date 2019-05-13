@@ -31,3 +31,9 @@ def test_init_db_command(runner, monkeypatch):
 def test_get_grade(client):
     res = client.get('/grade?username=aaa')
     assert res.json[0]['user_id'] == 1
+
+def test_get_user(client):
+    res = client.get('/user?id_tag=222')
+    assert res.json[0]['username'] == 'bbb'
+    assert res.json[0]['id_tag'] == '222'
+    assert res.json[0]['repo'] == 'bbb/test'
