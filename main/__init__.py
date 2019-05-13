@@ -13,6 +13,12 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'grade.sqlite'),
     )
 
+    if 'dbauth' in os.environ:
+        dbauth = os.environ.get('dbauth')
+    else:
+        dbauth = 'changeit'
+        print("dbauth not found.\nUsing temporary key")
+
     if test_config:
         # load the test config if passed in
         app.config.from_mapping(test_config)
@@ -42,7 +48,6 @@ def create_app(test_config=None):
             f.write("\n" + data['key'])
         return jsonify({'message': 'success'})
 
-    # TODO: 检测 header['X-DB-Auth'] == 'static110'
     @app.route('/grade', methods=['GET', 'POST'])
     def grade():
         """
@@ -70,8 +75,13 @@ def create_app(test_config=None):
                 lambda item: dict(zip(item.keys(), tuple(item))),
                 test_grade)))
         if request.method == 'POST':
+            if 'X-DB-Auth' not in request.headers or not request.headers.get('X-DB-Auth') == dbauth:
+                return jsonify({"error": "missing header"})
             data = request.json
-            uid = db.execute("""SELECT id FROM user WHERE id_tag = ?""", (data['id_tag'],)).fetchone()['id']
+            try:
+                uid = db.execute("""SELECT id FROM user WHERE id_tag = ?""", (data['id_tag'],)).fetchone()['id']
+            except:
+                return jsonify({'error': 'no such user'})
             db.execute("""INSERT INTO test(user_id, test_status, error_log) VALUES (?, ?, ? )""",
                        (uid, data['test_status'], data['error_log']))
             try:
@@ -82,7 +92,6 @@ def create_app(test_config=None):
                 print(e)
                 return jsonify({'error': 'insert error'})
 
-    # TODO: 检测 header['X-DB-Auth'] == 'static110'
     @app.route('/user', methods=['GET', 'POST', 'PUT'])
     def user():
         """
@@ -115,10 +124,16 @@ def create_app(test_config=None):
                 lambda item: dict(zip(item.keys(), tuple(item))),
                 userinfo)))
         elif request.method == 'POST':
+            if 'X-DB-Auth' not in request.headers or not request.headers.get('X-DB-Auth') == dbauth:
+                return jsonify({"error": "missing header"})
             data = request.json
-            uid = db.execute("""SELECT id FROM user WHERE id_tag = ?""", (data['id_tag'],)).fetchone()['id']
-            if uid:
-                return jsonify({"error": "user exists"})
+            try:
+                uid = db.execute("""SELECT id FROM user WHERE id_tag = ?""", (data['id_tag'],)).fetchone()['id']
+                if uid:
+                    return jsonify({"error": "user exists"})
+            except:
+                pass
+
             else:
                 db.execute("""INSERT INTO user(username, id_tag, repo) VALUES (?, ?, ? )""",
                            (data['username'], data['id_tag'], data['repo']))
@@ -130,13 +145,16 @@ def create_app(test_config=None):
                 print(e)
                 return jsonify({"error": "insert error"})
         elif request.method == 'PUT':
+            if 'X-DB-Auth' not in request.headers or not request.headers.get('X-DB-Auth') == dbauth:
+                return jsonify({"error": "missing header"})
             data = request.json
-            uid = db.execute("""SELECT id FROM user WHERE id_tag = ?""", (data['id_tag'],)).fetchone()['id']
-            if not uid:
+            try:
+                uid = db.execute("""SELECT id FROM user WHERE id_tag = ?""", (data['id_tag'],)).fetchone()['id']
+            except:
                 return jsonify({"error": "no such user"})
             else:
-                db.execute("""UPDATE user set repo=? WHERE id_tag=?""",
-                           (data['repo'], data['id_tag'], data['repo']))
+                db.execute("""UPDATE user set repo=? WHERE id_tag=? and id=?""",
+                           (data['repo'], data['id_tag'], uid))
             try:
                 db.commit()
                 return jsonify({'message': 'success'})

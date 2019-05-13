@@ -36,21 +36,107 @@ def test_get_user(client):
     assert res.json[0]['repo'] == 'bbb/test'
 
 
-# TODO: GET /grade
 def test_get_grade(client):
-    pass
+    res = client.get('/grade?id_tag=111')
+    assert res.json[0]['user_id'] == 1
+    assert res.json[0]['test_status'] == 'passed'
+    assert res.json[0]['error_log'] == 'ok'
+
+    res = client.get('/grade?id_tag=222')
+    assert res.json[0]['user_id'] == 2
+    assert res.json[0]['test_status'] == 'passed'
+    assert res.json[0]['error_log'] == 'ok'
+
+    res = client.get('/grade?id_tag=333')
+    assert res.json[0]['user_id'] == 3
+    assert res.json[0]['test_status'] == 'failure'
+    assert res.json[0]['error_log'] == 'error'
+
+    res = client.get('/grade?id_tag=2')
+    assert res.json.get('error') == 'no such user'
 
 
-# TODO: POST /grade
 def test_post_grade(client):
-    pass
+    res = client.post('/grade', headers={'X-DB-Auth': 'changeit'}, json={
+        "id_tag": "333",
+        "test_status": "passed",
+        "error_log": "ok"
+    })
+    assert res.json.get('message') == 'success'
+
+    res = client.post('/grade', headers={'X-DB-Auth': 'wrong'}, json={
+        "id_tag": "333",
+        "test_status": "passed",
+        "error_log": "ok"
+    })
+    assert res.json.get('error') == 'missing header'
+
+    res = client.post('/grade', json={
+        "id_tag": "333",
+        "test_status": "passed",
+        "error_log": "ok"
+    })
+    assert res.json.get('error') == 'missing header'
+
+    res = client.post('/grade', headers={'X-DB-Auth': 'changeit'}, json={
+        "id_tag": "wrong",
+        "test_status": "passed",
+        "error_log": "ok"
+    })
+    assert res.json.get('error') == 'no such user'
 
 
-# TODO: POST /user
 def test_post_user(client):
-    pass
+    res = client.post('/user', headers={'X-DB-Auth': 'changeit'}, json={
+        "id_tag": "666",
+        "username": "temp",
+        "repo": "https://github.com/temp.git"
+    })
+    assert res.json.get('message') == 'success'
+
+    res = client.post('/user', headers={'X-DB-Auth': 'wrong'}, json={
+        "id_tag": "666",
+        "username": "temp",
+        "repo": "https://github.com/temp.git"
+    })
+    assert res.json.get('error') == 'missing header'
+
+    res = client.post('/user', json={
+        "id_tag": "666",
+        "username": "temp",
+        "repo": "https://github.com/temp.git"
+    })
+    assert res.json.get('error') == 'missing header'
+
+    res = client.post('/user', headers={'X-DB-Auth': 'changeit'}, json={
+        "id_tag": "111",
+        "username": "temp",
+        "repo": "https://github.com/temp.git"
+    })
+    assert res.json.get('error') == 'user exists'
 
 
-# TODO: PUT /user
 def test_put_user(client):
-    pass
+    res = client.put('/user', headers={'X-DB-Auth': 'changeit'}, json={
+        "id_tag": "111",
+        "repo": "https://github.com/temp.git"
+    })
+    assert res.json.get('message') == 'success'
+
+    res = client.put('/user', headers={'X-DB-Auth': 'wrong'}, json={
+        "id_tag": "111",
+        "repo": "https://github.com/temp.git"
+    })
+    assert res.json.get('error') == 'missing header'
+
+    res = client.put('/user', json={
+        "id_tag": "111",
+        "repo": "https://github.com/temp.git"
+    })
+    assert res.json.get('error') == 'missing header'
+
+    res = client.put('/user', headers={'X-DB-Auth': 'changeit'}, json={
+        "id_tag": "999",
+        "repo": "https://github.com/temp.git"
+    })
+    assert res.json.get('error') == 'no such user'
