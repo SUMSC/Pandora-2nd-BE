@@ -1,6 +1,7 @@
 import sqlite3
 
 import pytest
+
 from main.db import get_db
 
 
@@ -28,12 +29,28 @@ def test_init_db_command(runner, monkeypatch):
     assert Recorder.called
 
 
-def test_get_grade(client):
-    res = client.get('/grade?username=aaa')
-    assert res.json[0]['user_id'] == 1
-
 def test_get_user(client):
     res = client.get('/user?id_tag=222')
     assert res.json[0]['username'] == 'bbb'
     assert res.json[0]['id_tag'] == '222'
     assert res.json[0]['repo'] == 'bbb/test'
+
+
+# TODO: GET /grade
+def test_get_grade(client):
+    pass
+
+
+# TODO: POST /grade
+def test_post_grade(client):
+    pass
+
+
+# TODO: POST /user
+def test_post_user(client):
+    pass
+
+
+# TODO: PUT /user
+def test_put_user(client):
+    pass

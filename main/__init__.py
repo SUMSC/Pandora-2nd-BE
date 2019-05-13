@@ -1,6 +1,7 @@
 import os
 
-from flask import Flask, request, jsonify, g
+from flask import Flask, request, jsonify
+
 from main.db import get_db
 
 
@@ -41,15 +42,27 @@ def create_app(test_config=None):
             f.write("\n" + data['key'])
         return jsonify({'message': 'success'})
 
+    # TODO: 检测 header['X-DB-Auth'] == 'static110'
     @app.route('/grade', methods=['GET', 'POST'])
     def grade():
+        """
+        GET: ?id_tag=<id_tag>
+        :return: [{<test_row>}]
+        POST: JSON Format:
+        {
+            "id_tag": <id_tag: str>,
+            "test_status": <test_status: passed|failure>,
+            "error_log": <error_log: str>
+        }
+        :return: {"message": "success"} | {"error": "insert error"}
+        """
         db = get_db()
         if request.method == 'GET':
-            username = request.args.get('username')
+            id_tag = request.args.get('id_tag')
             test_grade = db.execute('''
                 SELECT * FROM test WHERE user_id IN (
-                    SELECT id FROM user WHERE username = ?
-                ) ORDER BY test_time''', (username,)
+                    SELECT id FROM user WHERE id_tag = ?
+                ) ORDER BY test_time''', (id_tag,)
                                     ).fetchall()
             if not test_grade:
                 return jsonify({"error": "no such user"})
@@ -58,23 +71,39 @@ def create_app(test_config=None):
                 test_grade)))
         if request.method == 'POST':
             data = request.json
-            uid = db.execute("""SELECT id FROM user WHERE username = ?""", (data['username'],)).fetchone()['id']
+            uid = db.execute("""SELECT id FROM user WHERE id_tag = ?""", (data['id_tag'],)).fetchone()['id']
             db.execute("""INSERT INTO test(user_id, test_status, error_log) VALUES (?, ?, ? )""",
                        (uid, data['test_status'], data['error_log']))
             try:
                 db.commit()
                 return jsonify({'message': 'success'})
             except Exception as e:
+                db.rollback()
                 print(e)
-                return "error"
+                return jsonify({'error': 'insert error'})
 
+    # TODO: 检测 header['X-DB-Auth'] == 'static110'
     @app.route('/user', methods=['GET', 'POST', 'PUT'])
     def user():
+        """
+        GET: Query String: ?id_tag=<id_tag>
+        :return: [{<user_row>}]
+        POST: JSON Format:
+        {
+            "id_tag": "<string>",
+            "username": "<string>",
+            "repo": "<string> (Must be github repo url in https mode or just 'None')"
+        }
+        :return: {'message': 'success'}|{"error": "user exists"}
+        PUT: JSON Format:
+        {
+            "id_tag": "<string>",
+            "repo": "<string> (Must be github repo url in https mode or just 'None')"
+        }
+        :return: {'message': 'success'}|{"error": "no such user"}
+        """
         db = get_db()
         if request.method == 'GET':
-            """
-            get user info
-            """
             id_tag = request.args.get('id_tag')
             userinfo = db.execute('''
                 SELECT USERNAME,ID_TAG,REPO FROM user WHERE id_tag=?
@@ -86,14 +115,6 @@ def create_app(test_config=None):
                 lambda item: dict(zip(item.keys(), tuple(item))),
                 userinfo)))
         elif request.method == 'POST':
-            """
-            JSON Format:
-            {
-                "id_tag": "<string>",
-                "username": "<string>",
-                "repo": "<string> (Must be github repo url in https mode or just 'None')"
-            }
-            """
             data = request.json
             uid = db.execute("""SELECT id FROM user WHERE id_tag = ?""", (data['id_tag'],)).fetchone()['id']
             if uid:
@@ -107,15 +128,8 @@ def create_app(test_config=None):
             except Exception as e:
                 db.rollback()
                 print(e)
-                return "error"
+                return jsonify({"error": "insert error"})
         elif request.method == 'PUT':
-            """
-            JSON Format:
-            {
-                "id_tag": "<string>",
-                "repo": "<string> (Must be github repo url in https mode or just 'None')"
-            }
-            """
             data = request.json
             uid = db.execute("""SELECT id FROM user WHERE id_tag = ?""", (data['id_tag'],)).fetchone()['id']
             if not uid:
@@ -129,7 +143,7 @@ def create_app(test_config=None):
             except Exception as e:
                 db.rollback()
                 print(e)
-                return "error"
+                return jsonify({"error": "update error"})
 
     from . import db
     db.init_app(app)
