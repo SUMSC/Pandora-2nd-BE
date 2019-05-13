@@ -108,7 +108,7 @@ def create_app(test_config=None):
                 db.rollback()
                 print(e)
                 return "error"
-        elif request.method == 'POST':
+        elif request.method == 'PUT':
             """
             JSON Format:
             {
