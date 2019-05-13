@@ -68,7 +68,7 @@ def create_app(test_config=None):
                 print(e)
                 return "error"
 
-    @app.route('/user', methods=['GET', 'POST'])
+    @app.route('/user', methods=['GET', 'POST', 'PUT'])
     def user():
         db = get_db()
         if request.method == 'GET':
@@ -101,6 +101,28 @@ def create_app(test_config=None):
             else:
                 db.execute("""INSERT INTO user(username, id_tag, repo) VALUES (?, ?, ? )""",
                            (data['username'], data['id_tag'], data['repo']))
+            try:
+                db.commit()
+                return jsonify({'message': 'success'})
+            except Exception as e:
+                db.rollback()
+                print(e)
+                return "error"
+        elif request.method == 'POST':
+            """
+            JSON Format:
+            {
+                "id_tag": "<string>",
+                "repo": "<string> (Must be github repo url in https mode or just 'None')"
+            }
+            """
+            data = request.json
+            uid = db.execute("""SELECT id FROM user WHERE id_tag = ?""", (data['id_tag'],)).fetchone()['id']
+            if not uid:
+                return jsonify({"error": "no such user"})
+            else:
+                db.execute("""UPDATE user set repo=? WHERE id_tag=?""",
+                           (data['repo'], data['id_tag'], data['repo']))
             try:
                 db.commit()
                 return jsonify({'message': 'success'})
