@@ -46,7 +46,7 @@ def create_app(test_config=None):
         data = request.json
         if not data['key'].startswith("ssh-rsa"):
             return jsonify({'error': 'wrong key'})
-        with open("/home/pandora/.ssh/authrized_key", 'a') as f:
+        with open("/home/pandora/.ssh/authorized_key", 'a') as f:
             f.write("\n" + data['key'])
         return jsonify({'message': 'success'})
 
