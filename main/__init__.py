@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 from main.db import get_db
 
@@ -8,6 +9,7 @@ from main.db import get_db
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+    CORS(app)
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'grade.sqlite'),
@@ -17,7 +19,7 @@ def create_app(test_config=None):
         dbauth = os.environ.get('dbauth')
     else:
         dbauth = 'changeit'
-        print("dbauth not found.\nUsing temporary key")
+        print("dbauth not found, using temporary key")
 
     if test_config:
         # load the test config if passed in
@@ -57,20 +59,21 @@ def create_app(test_config=None):
         {
             "id_tag": <id_tag: str>,
             "test_status": <test_status: passed|failure>,
-            "error_log": <error_log: str>
+            "error_log": <error_log: str>,
+            "repo": <repo: str>
         }
         :return: {"message": "success"} | {"error": "insert error"}
         """
         db = get_db()
         if request.method == 'GET':
             id_tag = request.args.get('id_tag')
-            test_grade = db.execute('''
-                SELECT * FROM test WHERE user_id IN (
-                    SELECT id FROM user WHERE id_tag = ?
-                ) ORDER BY test_time''', (id_tag,)
-                                    ).fetchall()
-            if not test_grade:
+            try:
+                uid = db.execute("""SELECT id FROM user WHERE id_tag = ?""", (id_tag,)).fetchone()['id']
+            except:
                 return jsonify({"error": "no such user"})
+            test_grade = db.execute('''SELECT * FROM test WHERE user_id=? ORDER BY test_time''', (uid,)).fetchall()
+            if not test_grade:
+                return jsonify([])
             return jsonify(list(map(
                 lambda item: dict(zip(item.keys(), tuple(item))),
                 test_grade)))
@@ -82,9 +85,9 @@ def create_app(test_config=None):
                 uid = db.execute("""SELECT id FROM user WHERE id_tag = ?""", (data['id_tag'],)).fetchone()['id']
             except:
                 return jsonify({'error': 'no such user'})
-            db.execute("""INSERT INTO test(user_id, test_status, error_log) VALUES (?, ?, ? )""",
-                       (uid, data['test_status'], data['error_log']))
             try:
+                db.execute("""INSERT INTO test(user_id, test_status, error_log, repo) VALUES (?, ?, ?, ?)""",
+                           (uid, data['test_status'], data['error_log'], data['repo']))
                 db.commit()
                 return jsonify({'message': 'success'})
             except Exception as e:
@@ -116,8 +119,7 @@ def create_app(test_config=None):
             id_tag = request.args.get('id_tag')
             userinfo = db.execute('''
                 SELECT USERNAME,ID_TAG,REPO FROM user WHERE id_tag=?
-            ''', (id_tag,)
-                                  ).fetchall()
+            ''', (id_tag,)).fetchall()
             if not userinfo:
                 return jsonify({"error": "no such user"})
             return jsonify(list(map(
@@ -134,10 +136,9 @@ def create_app(test_config=None):
             except:
                 pass
 
-            else:
-                db.execute("""INSERT INTO user(username, id_tag, repo) VALUES (?, ?, ? )""",
-                           (data['username'], data['id_tag'], data['repo']))
             try:
+                db.execute("""INSERT INTO user(username, id_tag, repo) VALUES (?, ?, ? )""",
+                           (data['username'], data['id_tag'], data.get('repo')))
                 db.commit()
                 return jsonify({'message': 'success'})
             except Exception as e:
@@ -153,6 +154,7 @@ def create_app(test_config=None):
             except:
                 return jsonify({"error": "no such user"})
             else:
+                print(data)
                 db.execute("""UPDATE user set repo=? WHERE id_tag=? and id=?""",
                            (data['repo'], data['id_tag'], uid))
             try:
