@@ -31,7 +31,7 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route('/')
+    @app.route('/home')
     def index():
         return 'here is nothing to show.'
 
@@ -46,7 +46,7 @@ def create_app(test_config=None):
         data = request.json
         if not data['key'].startswith("ssh-rsa"):
             return jsonify({'error': 'wrong key'})
-        with open("/home/pandora/.ssh/authorized_key", 'a') as f:
+        with open("/home/pandora/.ssh/authorized_keys", 'a') as f:
             f.write("\n" + data['key'])
         return jsonify({'message': 'success'})
 
