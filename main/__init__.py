@@ -82,9 +82,10 @@ def create_app(test_config=None):
                 uid = db.execute("""SELECT id FROM user WHERE id_tag = ?""", (data['id_tag'],)).fetchone()['id']
             except:
                 return jsonify({'error': 'no such user'})
-            db.execute("""INSERT INTO test(user_id, test_status, error_log) VALUES (?, ?, ? )""",
-                       (uid, data['test_status'], data['error_log']))
+
             try:
+                db.execute("""INSERT INTO test(user_id, test_status, error_log) VALUES (?, ?, ? )""",
+                           (uid, data['test_status'], data['error_log']))
                 db.commit()
                 return jsonify({'message': 'success'})
             except Exception as e:
@@ -134,10 +135,9 @@ def create_app(test_config=None):
             except:
                 pass
 
-            else:
+            try:
                 db.execute("""INSERT INTO user(username, id_tag, repo) VALUES (?, ?, ? )""",
                            (data['username'], data['id_tag'], data['repo']))
-            try:
                 db.commit()
                 return jsonify({'message': 'success'})
             except Exception as e:
@@ -152,10 +152,10 @@ def create_app(test_config=None):
                 uid = db.execute("""SELECT id FROM user WHERE id_tag = ?""", (data['id_tag'],)).fetchone()['id']
             except:
                 return jsonify({"error": "no such user"})
-            else:
+
+            try:
                 db.execute("""UPDATE user set repo=? WHERE id_tag=? and id=?""",
                            (data['repo'], data['id_tag'], uid))
-            try:
                 db.commit()
                 return jsonify({'message': 'success'})
             except Exception as e:
