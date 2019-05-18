@@ -29,6 +29,9 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    from . import db
+    db.init_app(app)
+
     @app.route('/')
     def index():
         return 'here is nothing to show.'
@@ -163,7 +166,7 @@ def create_app(test_config=None):
                 print(e)
                 return jsonify({"error": "update error"})
 
-    from . import db
-    db.init_app(app)
-
     return app
+
+
+app = create_app()
