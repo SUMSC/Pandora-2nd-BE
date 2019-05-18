@@ -152,10 +152,10 @@ def create_app(test_config=None):
                 uid = db.execute("""SELECT id FROM user WHERE id_tag = ?""", (data['id_tag'],)).fetchone()['id']
             except:
                 return jsonify({"error": "no such user"})
-
-            try:
+            else:
                 db.execute("""UPDATE user set repo=? WHERE id_tag=? and id=?""",
                            (data['repo'], data['id_tag'], uid))
+            try:
                 db.commit()
                 return jsonify({'message': 'success'})
             except Exception as e:
