@@ -3,6 +3,7 @@ import os
 from flask import Flask, request, jsonify
 
 from main.db import get_db
+import sqlite3
 
 
 def create_app(test_config=None):
@@ -161,9 +162,11 @@ def create_app(test_config=None):
                            (data['repo'], data['id_tag'], uid))
                 db.commit()
                 return jsonify({'message': 'success'})
-            except Exception as e:
+            except sqlite3.IntegrityError as e:
                 db.rollback()
                 print(e)
+                if e.args[0]=="UNIQUE constraint failed: user.repo":
+                    return jsonify({"error": "Repo exists"})
                 return jsonify({"error": "update error"})
 
     return app
