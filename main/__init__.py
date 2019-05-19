@@ -145,7 +145,7 @@ def create_app(test_config=None):
                 except Exception as e:
                     db.rollback()
                     print(e)
-                    return jsonify({"error": "insert error,{}".format(e)})
+                    return jsonify({"error": "insert error,{},{}".format(e, data['repo'])})
 
 
         elif request.method == 'PUT':
