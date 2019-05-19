@@ -137,17 +137,17 @@ def create_app(test_config=None):
                 if uid:
                     return jsonify({"error": "user exists"})
             except:
-                pass
+                try:
+                    db.execute("""INSERT INTO user(username, id_tag, repo) VALUES (?, ?, ? )""",
+                               (data['username'], data['id_tag'], data['repo']))
+                    db.commit()
+                    return jsonify({'message': 'success'})
+                except Exception as e:
+                    db.rollback()
+                    print(e)
+                    return jsonify({"error": "insert error"})
 
-            try:
-                db.execute("""INSERT INTO user(username, id_tag, repo) VALUES (?, ?, ? )""",
-                           (data['username'], data['id_tag'], data['repo']))
-                db.commit()
-                return jsonify({'message': 'success'})
-            except Exception as e:
-                db.rollback()
-                print(e)
-                return jsonify({"error": "insert error"})
+
         elif request.method == 'PUT':
             if 'X-DB-Auth' not in request.headers or not request.headers.get('X-DB-Auth') == dbauth:
                 return jsonify({"error": "missing header"})
@@ -165,7 +165,7 @@ def create_app(test_config=None):
             except sqlite3.IntegrityError as e:
                 db.rollback()
                 print(e)
-                if e.args[0]=="UNIQUE constraint failed: user.repo":
+                if e.args[0] == "UNIQUE constraint failed: user.repo":
                     return jsonify({"error": "Repo exists"})
                 return jsonify({"error": "update error"})
 
