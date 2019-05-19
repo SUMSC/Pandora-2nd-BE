@@ -56,7 +56,7 @@ def create_app(test_config=None):
                     return jsonify({'error': 'Please try again'})
             return jsonify({'message': 'success'})
         elif request.method == 'GET':
-            with open("/home/pandora/.ssh/authorized_keys", 'a') as f:
+            with open("/home/pandora/.ssh/authorized_keys", 'r') as f:
                 data = f.read()
                 return jsonify({'message': request.args.get('id_tag') in data if request.args.get('id_tag') else False})
         else:
