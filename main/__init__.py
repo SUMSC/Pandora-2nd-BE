@@ -106,13 +106,12 @@ def create_app(test_config=None):
         {
             "id_tag": "<string>",
             "username": "<string>",
-            "repo": "<string> (Must be github repo url in https mode or just 'None')"
         }
         :return: {'message': 'success'}|{"error": "user exists"}
         PUT: JSON Format:
         {
             "id_tag": "<string>",
-            "repo": "<string> (Must be github repo url in https mode or just 'None')"
+            "repo": "<string> (Must be github repo url in https mode)"
         }
         :return: {'message': 'success'}|{"error": "no such user"}
         """
