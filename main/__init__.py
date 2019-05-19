@@ -37,7 +37,7 @@ def create_app(test_config=None):
     def index():
         return 'here is nothing to show.'
 
-    @app.route('/ssh', methods=['POST'])
+    @app.route('/ssh', methods=['POST', 'GET'])
     def ssh_key_copy():
         """
         JSON Format:
@@ -45,15 +45,22 @@ def create_app(test_config=None):
           "key": "ssh-rsa ..."
         }
         """
-        data = request.json
-        if not data['key'].startswith("ssh-rsa"):
-            return jsonify({'error': 'wrong key'})
-        with open("/home/pandora/.ssh/authorized_keys", 'a') as f:
-            try:
-                f.write("\n" + data.get('key'))
-            except Exception as e:
-                return jsonify({'error': 'Please try again'})
-        return jsonify({'message': 'success'})
+        if request.method == 'POST':
+            data = request.json
+            if not data['key'].startswith("ssh-rsa"):
+                return jsonify({'error': 'wrong key'})
+            with open("/home/pandora/.ssh/authorized_keys", 'a') as f:
+                try:
+                    f.write("\n" + data.get('key'))
+                except Exception as e:
+                    return jsonify({'error': 'Please try again'})
+            return jsonify({'message': 'success'})
+        elif request.method == 'GET':
+            with open("/home/pandora/.ssh/authorized_keys", 'a') as f:
+                data = f.read()
+                return jsonify({'message': request.args.get('id_tag') in data if request.args.get('id_tag') else False})
+        else:
+            return jsonify({'error': 'Impossible'})
 
     @app.route('/grade', methods=['GET', 'POST'])
     def grade():
