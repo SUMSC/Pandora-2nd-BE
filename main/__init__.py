@@ -44,11 +44,13 @@ def create_app(test_config=None):
                 return jsonify({"error": "missing header"})
             db = get_db()
             try:
-                test_grade = db.execute('SELECT (id,name ,repo) FROM user ').fetchall()
-                return jsonify(test_grade)
+                test_grade = db.execute('SELECT * FROM user ').fetchall()
+                return jsonify(list(map(
+                    lambda item: dict(zip(item.keys(), tuple(item))),
+                    test_grade)))
 
             except Exception as e:
-                return jsonify({"error": e})
+                return jsonify({"error": str(e)})
 
     @app.route('/ssh', methods=['POST', 'GET'])
     def ssh_key_copy():
