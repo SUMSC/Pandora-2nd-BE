@@ -138,7 +138,7 @@ def create_app(test_config=None):
                     return jsonify({"error": "user exists"})
             except:
                 try:
-                    db.execute("""INSERT INTO user(username, id_tag) VALUES (?, ?, ? )""",
+                    db.execute("""INSERT INTO user(username, id_tag) VALUES (?, ? )""",
                                (data['username'], data['id_tag']))
                     db.commit()
                     return jsonify({'message': 'success'})
