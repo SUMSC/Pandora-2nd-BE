@@ -37,6 +37,14 @@ def create_app(test_config=None):
     def index():
         return 'here is nothing to show.'
 
+    @app.route('/inspect', methods=['POST'])
+    def inspect():
+        if request.method == 'POST':
+            if 'X-DB-Auth' not in request.headers or not request.headers.get('X-DB-Auth') == dbauth:
+                return jsonify({"error": "missing header"})
+
+
+
     @app.route('/ssh', methods=['POST', 'GET'])
     def ssh_key_copy():
         """
