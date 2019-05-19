@@ -48,8 +48,11 @@ def create_app(test_config=None):
         data = request.json
         if not data['key'].startswith("ssh-rsa"):
             return jsonify({'error': 'wrong key'})
-        with open("/home/pandora/.ssh/authrized_key", 'a') as f:
-            f.write("\n" + data['key'])
+        with open("/home/pandora/.ssh/authorized_keys", 'a') as f:
+            try:
+                f.write("\n" + data.get('key'))
+            except Exception as e:
+                return jsonify({'error': 'Please try again'})
         return jsonify({'message': 'success'})
 
     @app.route('/grade', methods=['GET', 'POST'])
