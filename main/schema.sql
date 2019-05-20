@@ -13,7 +13,7 @@ CREATE TABLE test
 (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id     INTEGER   NOT NULL,
-    test_time   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    test_time   TIMESTAMP NOT NULL DEFAULT (datetime('now', 'localtime')),
     test_status TEXT      NOT NULL,
     test_grade  TEXT      NOT NULL,
     error_log   TEXT      NOT NULL,
