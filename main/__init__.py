@@ -66,7 +66,7 @@ def create_app(test_config=None):
                         main.test,
                         main.user
                     where test.user_id = user.id
-                    order by test_grade desc)
+                    order by test_grade asc)
                     group by id_tag
                     ''').fetchall()
                 return jsonify(list(map(
