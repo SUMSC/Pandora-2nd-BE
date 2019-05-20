@@ -46,8 +46,9 @@ def create_app(test_config=None):
         if request.method == "GET":
             db = get_db()
             try:
-                all_test = db.execute('select count(distinct user_id) from test')[0]
-                passed_test = db.execute("select count(distinct user_id) from test where test_status = 'passed'")[0]
+                all_test = db.execute('select count(distinct user_id) from test').fetchone()[0]
+                passed_test = \
+                db.execute("select count(distinct user_id) from test where test_status = 'passed'").fetchone()[0]
                 return jsonify([{"value": passed_test / all_test}])
             except Exception as e:
                 return jsonify({"error": str(e)})
