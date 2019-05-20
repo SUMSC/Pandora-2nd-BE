@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7d372a56-0374-4110-8207-db8c3781f393" name="Default Changelist" comment="" />
+    <list default="true" id="7d372a56-0374-4110-8207-db8c3781f393" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/__init__.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,8 +57,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="124" lean-forward="true" selection-start-line="124" selection-end-line="124" />
+            <state relative-caret-position="286">
+              <caret line="118" column="32" selection-start-line="118" selection-start-column="32" selection-end-line="118" selection-end-column="32" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -256,21 +258,7 @@
       <workItem from="1558233042201" duration="1336000" />
       <workItem from="1558248486959" duration="3895000" />
       <workItem from="1558269779836" duration="1457000" />
-      <workItem from="1558276076137" duration="27306000" />
-    </task>
-    <task id="LOCAL-00007" summary="fix bug">
-      <created>1558233546388</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1558233546388</updated>
-    </task>
-    <task id="LOCAL-00008" summary="fix bugs">
-      <created>1558233639482</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1558233639482</updated>
+      <workItem from="1558276076137" duration="27758000" />
     </task>
     <task id="LOCAL-00009" summary="fix bugs">
       <created>1558233735778</created>
@@ -601,7 +589,21 @@
       <option name="project" value="LOCAL" />
       <updated>1558353007155</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="fix worldcloud">
+      <created>1558353233494</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1558353233495</updated>
+    </task>
+    <task id="LOCAL-00057" summary="fix worldcloud">
+      <created>1558353395916</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1558353395916</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -637,7 +639,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42051000" />
+    <option name="totallyTimeSpent" value="42503000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -825,8 +827,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="124" lean-forward="true" selection-start-line="124" selection-end-line="124" />
+        <state relative-caret-position="286">
+          <caret line="118" column="32" selection-start-line="118" selection-start-column="32" selection-end-line="118" selection-end-column="32" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
