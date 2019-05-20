@@ -1,5 +1,6 @@
 import os
 import sys
+import logging
 
 from flask import Flask, request, jsonify
 
@@ -64,6 +65,7 @@ def create_app(test_config=None):
 
             except Exception as e:
                 tb = sys.exc_info()[2]
+                logging.error(e, exc_info=True)
                 return jsonify({"error": str(e.with_traceback(tb))})
 
     @app.route('/ssh', methods=['POST', 'GET'])
