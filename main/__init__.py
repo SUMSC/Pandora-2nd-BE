@@ -57,7 +57,7 @@ def create_app(test_config=None):
             db = get_db()
             try:
                 test_grade = db.execute(
-                    'SELECT (user.id_tag, user.username, test.test_status, test.test_grade) FROM main.test, main.user where test.user_id=user.id order by test.test_grade desc LIMIT 10 ').fetchall()
+                    'SELECT user.id_tag, user.username, test.test_status, test.test_grade FROM main.test, main.user where test.user_id=user.id order by test.test_grade desc LIMIT 10 ').fetchall()
                 return jsonify(list(map(
                     lambda item: dict(zip(item.keys(), tuple(item))),
                     test_grade)))
