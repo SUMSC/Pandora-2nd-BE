@@ -1,6 +1,7 @@
 import os
 import sys
 import logging
+import time
 
 from flask import Flask, request, jsonify
 
@@ -40,6 +41,13 @@ def create_app(test_config=None):
     @app.route('/')
     def index():
         return 'here is nothing to show.'
+
+    @app.route('/inspect/time', methods=["GET"])
+    def time():
+        end = 1558713599
+        now = int(time.time())
+        res = int((end - now) / (end - 1558350000) * 100)
+        return jsonify([{"value": res}])
 
     @app.route('/inspect/passratio', methods=['GET'])
     def passratio():
