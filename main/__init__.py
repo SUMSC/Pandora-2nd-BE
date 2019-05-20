@@ -41,6 +41,23 @@ def create_app(test_config=None):
     def index():
         return 'here is nothing to show.'
 
+    @app.route('/inspect/graderatio', methods=['GET'])
+    def graderatio():
+        if request.method == "GET":
+            db = get_db()
+            try:
+                ratio = db.execute('''
+                select (count(distinct user.id_tag) / count(distinct test.user_id)) as value
+                from test,
+                    user
+                where test.user_id = user.id
+                ''').fetchall()
+                return jsonify(list(map(
+                    lambda item: dict(zip(item.keys(), tuple(item))),
+                    ratio)))
+            except Exception as e:
+                return jsonify({"error": str(e)})
+
     @app.route('/inspect/wordcloud', methods=['GET'])
     def wordcloud():
         if request.method == "GET":
