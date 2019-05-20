@@ -48,7 +48,7 @@ def create_app(test_config=None):
             try:
                 all_test = db.execute('select count(distinct user_id) from test').fetchone()[0]
                 passed_test = \
-                db.execute("select count(distinct user_id) from test where test_status = 'passed'").fetchone()[0]
+                    db.execute("select count(distinct user_id) from test where test_status = 'passed'").fetchone()[0]
                 return jsonify([{"value": passed_test / all_test}])
             except Exception as e:
                 return jsonify({"error": str(e)})
@@ -93,8 +93,8 @@ def create_app(test_config=None):
                 # return jsonify(list(map(
                 #     lambda item: dict(zip(item.keys(), tuple(item))),
                 #     ratio)))
-                all_test = db.execute('select count(distinct user_id) from test')[0]
-                all_user = db.execute("select count(distinct id_tag) from user")[0]
+                all_test = db.execute('select count(distinct user_id) from test').fetchone()[0]
+                all_user = db.execute("select count(distinct id_tag) from user").fetchone()[0]
                 return jsonify([{"value": all_test / all_user}])
             except Exception as e:
                 return jsonify({"error": str(e)})
