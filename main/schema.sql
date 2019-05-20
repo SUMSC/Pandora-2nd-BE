@@ -15,7 +15,7 @@ CREATE TABLE test
     user_id     INTEGER   NOT NULL,
     test_time   TIMESTAMP NOT NULL DEFAULT (datetime('now', 'localtime')),
     test_status TEXT      NOT NULL,
-    test_grade  TEXT      NOT NULL,
+    test_grade  INTEGER   NOT NULL,
     error_log   TEXT      NOT NULL,
     repo        TEXT,
     FOREIGN KEY (user_id) REFERENCES user (id)
