@@ -58,8 +58,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+            <state relative-caret-position="418">
+              <caret line="46" column="24" lean-forward="true" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="24" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -259,21 +259,7 @@
       <workItem from="1558233042201" duration="1336000" />
       <workItem from="1558248486959" duration="3895000" />
       <workItem from="1558269779836" duration="1457000" />
-      <workItem from="1558276076137" duration="25486000" />
-    </task>
-    <task id="LOCAL-00003" summary="add robustness">
-      <created>1558180218744</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1558180218744</updated>
-    </task>
-    <task id="LOCAL-00004" summary="add robustness">
-      <created>1558180443480</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1558180443480</updated>
+      <workItem from="1558276076137" duration="25988000" />
     </task>
     <task id="LOCAL-00005" summary="fix bug">
       <created>1558180623867</created>
@@ -604,7 +590,21 @@
       <option name="project" value="LOCAL" />
       <updated>1558344173602</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="add time progress">
+      <created>1558346075117</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1558346075117</updated>
+    </task>
+    <task id="LOCAL-00053" summary="add time progress">
+      <created>1558346190069</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1558346190069</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -640,7 +640,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40231000" />
+    <option name="totallyTimeSpent" value="40733000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -706,7 +706,8 @@
     <MESSAGE value="fix slash" />
     <MESSAGE value="fix fetchone" />
     <MESSAGE value="fix graderatio" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix graderatio" />
+    <MESSAGE value="add time progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="add time progress" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Pandora_2nd_BE$pytest_for_test_db_test_post_grade.coverage" NAME="pytest for test_db.test_post_grade Coverage Results" MODIFIED="1558317472590" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -826,8 +827,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+        <state relative-caret-position="418">
+          <caret line="46" column="24" lean-forward="true" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="24" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

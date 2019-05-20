@@ -46,7 +46,7 @@ def create_app(test_config=None):
     def mytime():
         end = 1558713599
         now = int(time.time())
-        res = int((end - now) / (end - 1558350000) * 100)
+        res = ((now - 1558350000) / (end - 1558350000)) * 100
         return jsonify([{"value": res}])
 
     @app.route('/inspect/passratio', methods=['GET'])
