@@ -37,7 +37,7 @@ def create_app(test_config=None):
     def index():
         return 'here is nothing to show.'
 
-    @app.route('/inspect', methods=['POST'])
+    @app.route('/inspect', methods=['POST', 'GET'])
     def inspect():
         if request.method == 'POST':
             if 'X-DB-Auth' not in request.headers or not request.headers.get('X-DB-Auth') == dbauth:
@@ -45,6 +45,17 @@ def create_app(test_config=None):
             db = get_db()
             try:
                 test_grade = db.execute('SELECT * FROM user ').fetchall()
+                return jsonify(list(map(
+                    lambda item: dict(zip(item.keys(), tuple(item))),
+                    test_grade)))
+
+            except Exception as e:
+                return jsonify({"error": str(e)})
+        elif request.method == 'GET':
+            db = get_db()
+            try:
+                test_grade = db.execute(
+                    'SELECT (test.user_id,user.username,test_status,test_grade) FROM test,user where test.user_id=user.id_tag order by test_grade desc LIMIT 10 ').fetchall()
                 return jsonify(list(map(
                     lambda item: dict(zip(item.keys(), tuple(item))),
                     test_grade)))
