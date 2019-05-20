@@ -2,6 +2,7 @@ import os
 import sys
 import logging
 import time
+import random
 
 from flask import Flask, request, jsonify
 
@@ -112,10 +113,13 @@ def create_app(test_config=None):
         if request.method == "GET":
             db = get_db()
             try:
-                test_grade = db.execute('SELECT id as value ,username as name FROM user ').fetchall()
-                return jsonify(list(map(
-                    lambda item: dict(zip(item.keys(), tuple(item))),
-                    test_grade)))
+                test_grade = db.execute('SELECT id as value ,username as name FROM user order by id desc').fetchall()
+
+                def rand_id(item):
+                    item['id'] = 2 * random.random() + 1
+                    return dict(zip(item.keys(), tuple(item)))
+
+                return jsonify(list(map(rand_id, test_grade)))
             except Exception as e:
                 return jsonify({"error": str(e)})
 
