@@ -119,7 +119,7 @@ def create_app(test_config=None):
                     item['value'] = 2 * random.random() + 1
                     return dict(zip(item.keys(), tuple(item)))
 
-                return jsonify(list(map(rand_id, test_grade)))
+                return jsonify(list(map(rand_id, list(test_grade))))
             except Exception as e:
                 return jsonify({"error": str(e)})
 
