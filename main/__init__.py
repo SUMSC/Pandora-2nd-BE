@@ -41,6 +41,17 @@ def create_app(test_config=None):
     def index():
         return 'here is nothing to show.'
 
+    @app.route('/inspect/usernum', methods=['GET'])
+    def usernum():
+        db = get_db()
+        try:
+            num = db.execute('''
+                        select count(distinct id_tag) as value from user
+                        ''').fetchone()
+            return jsonify(list({"name": "参赛人数", "value": num[0], "prefix": "共", "suffix": "人"}))
+        except Exception as e:
+            return jsonify({"error": str(e)})
+
     @app.route('/inspect/graderatio', methods=['GET'])
     def graderatio():
         if request.method == "GET":
