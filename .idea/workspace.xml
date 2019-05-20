@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7d372a56-0374-4110-8207-db8c3781f393" name="Default Changelist" comment="">
+    <list default="true" id="7d372a56-0374-4110-8207-db8c3781f393" name="Default Changelist" comment="add repo to grade">
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/__init__.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,10 +30,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="46" column="49" selection-start-line="46" selection-start-column="49" selection-end-line="46" selection-end-column="49" />
+            <state relative-caret-position="277">
+              <caret line="113" selection-start-line="113" selection-end-line="113" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_db.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="87" column="35" selection-start-line="87" selection-start-column="35" selection-end-line="87" selection-end-column="35" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -44,6 +56,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="616">
               <caret line="32" selection-start-line="32" selection-end-line="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/schema.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="14" column="21" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -97,6 +118,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="sqlite" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/venv/Lib/site-packages/werkzeug/test.py" />
@@ -115,7 +137,23 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python tests.pytest">
+    <configuration name="pytest for test_db.test_post_grade" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="Pandora-2nd-BE" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_db.test_post_grade&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="pytest" type="tests" factoryName="py.test" nameIsGenerated="true">
       <module name="Pandora-2nd-BE" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -132,6 +170,11 @@
       <option name="_new_targetType" value="&quot;CUSTOM&quot;" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.pytest for test_db.test_post_grade" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -154,7 +197,7 @@
       <workItem from="1558233042201" duration="1336000" />
       <workItem from="1558248486959" duration="3895000" />
       <workItem from="1558269779836" duration="1457000" />
-      <workItem from="1558276076137" duration="1087000" />
+      <workItem from="1558276076137" duration="6448000" />
     </task>
     <task id="LOCAL-00001" summary="add some test">
       <created>1557722924825</created>
@@ -275,22 +318,38 @@
       <option name="project" value="LOCAL" />
       <updated>1558277136642</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="fix inspect">
+      <created>1558277371924</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1558277371924</updated>
+    </task>
+    <task id="LOCAL-00019" summary="add repo to grade">
+      <created>1558315827113</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1558315827113</updated>
+    </task>
+    <task id="LOCAL-00020" summary="debug grade">
+      <created>1558316908652</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1558316908652</updated>
+    </task>
+    <task id="LOCAL-00021" summary="add repo to grade">
+      <created>1558317486205</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1558317486205</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest_for_test_db_test_put_user - 2019.05.13 at 20h 50m 55s.xml">
-      <configuration name="pytest for test_db.test_put_user" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_db_test_put_user - 2019.05.13 at 20h 51m 49s.xml">
-      <configuration name="pytest for test_db.test_put_user" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_db_test_put_user - 2019.05.13 at 20h 52m 08s.xml">
-      <configuration name="pytest for test_db.test_put_user" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_test_db_test_put_user - 2019.05.13 at 20h 52m 36s.xml">
-      <configuration name="pytest for test_db.test_put_user" configurationId="tests" />
-    </history-entry>
     <history-entry file="pytest_for_test_db_test_put_user - 2019.05.13 at 20h 52m 56s.xml">
       <configuration name="pytest for test_db.test_put_user" configurationId="tests" />
     </history-entry>
@@ -309,9 +368,21 @@
     <history-entry file="pytest - 2019.05.19 at 10h 42m 29s.xml">
       <configuration name="pytest" configurationId="tests" />
     </history-entry>
+    <history-entry file="pytest_for_test_db_test_post_grade - 2019.05.20 at 09h 54m 13s.xml">
+      <configuration name="pytest for test_db.test_post_grade" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_db_test_post_grade - 2019.05.20 at 09h 54m 54s.xml">
+      <configuration name="pytest for test_db.test_post_grade" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_test_db_test_post_grade - 2019.05.20 at 09h 57m 53s.xml">
+      <configuration name="pytest for test_db.test_post_grade" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest - 2019.05.20 at 09h 58m 10s.xml">
+      <configuration name="pytest" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15832000" />
+    <option name="totallyTimeSpent" value="21193000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -331,7 +402,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32846716" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.327852" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -362,14 +433,16 @@
     <MESSAGE value="add ssh get" />
     <MESSAGE value="fix ssh get" />
     <MESSAGE value="fix inspect" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix inspect" />
+    <MESSAGE value="debug grade" />
+    <MESSAGE value="add repo to grade" />
+    <option name="LAST_COMMIT_MESSAGE" value="add repo to grade" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Pandora_2nd_BE$pytest_for_test_db_test_post_grade.coverage" NAME="pytest for test_db.test_post_grade Coverage Results" MODIFIED="1557751006544" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Pandora_2nd_BE$pytest_for_test_db_test_post_grade.coverage" NAME="pytest for test_db.test_post_grade Coverage Results" MODIFIED="1558317472590" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Pandora_2nd_BE$pytest_for_test_db_test_post_grade_test_post_user.coverage" NAME="pytest for test_db.test_post_grade.test_post_user Coverage Results" MODIFIED="1557751554287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Pandora_2nd_BE$pytest_for_test_db_test_put_user.coverage" NAME="pytest for test_db.test_put_user Coverage Results" MODIFIED="1557752047273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Pandora_2nd_BE$pytest_for_test_db_test_get_user.coverage" NAME="pytest for test_db.test_get_user Coverage Results" MODIFIED="1557721598132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Pandora_2nd_BE$pytest.coverage" NAME="pytest Coverage Results" MODIFIED="1558233745705" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pandora_2nd_BE$pytest.coverage" NAME="pytest Coverage Results" MODIFIED="1558317488778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pandora_2nd_BE$pytest_for_test_db_test_post_user.coverage" NAME="pytest for test_db.test_post_user Coverage Results" MODIFIED="1557751829280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Pandora_2nd_BE$pytest_for_test_db_test_get_grade.coverage" NAME="pytest for test_db.test_get_grade Coverage Results" MODIFIED="1557750494205" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
@@ -405,30 +478,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main/db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/schema.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="21" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="90" column="24" selection-start-line="90" selection-start-column="24" selection-end-line="90" selection-end-column="24" />
+        <state relative-caret-position="198">
+          <caret line="87" column="35" selection-start-line="87" selection-start-column="35" selection-end-line="87" selection-end-column="35" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/__init__.py">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/flask/wrappers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="46" column="49" selection-start-line="46" selection-start-column="49" selection-end-line="46" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-407">
+          <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/db.py">
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/typing.pyi">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        <state relative-caret-position="207">
+          <caret line="348" column="8" selection-start-line="348" selection-start-column="8" selection-end-line="348" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="113" selection-start-line="113" selection-end-line="113" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -120,7 +120,7 @@ def create_app(test_config=None):
             except Exception as e:
                 db.rollback()
                 print(e)
-                return jsonify({'error': 'insert error'})
+                return jsonify({'error': 'insert error' + str(e)})
 
     @app.route('/user', methods=['GET', 'POST', 'PUT'])
     def user():
