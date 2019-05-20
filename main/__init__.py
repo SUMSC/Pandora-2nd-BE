@@ -1,4 +1,5 @@
 import os
+import sys
 
 from flask import Flask, request, jsonify
 
@@ -62,7 +63,8 @@ def create_app(test_config=None):
                     test_grade)))
 
             except Exception as e:
-                return jsonify({"error": str(e)})
+                tb = sys.exc_info()[2]
+                return jsonify({"error": str(e.with_traceback(tb))})
 
     @app.route('/ssh', methods=['POST', 'GET'])
     def ssh_key_copy():
