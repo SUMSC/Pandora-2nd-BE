@@ -41,6 +41,18 @@ def create_app(test_config=None):
     def index():
         return 'here is nothing to show.'
 
+    @app.route('/inspect/wordcloud', methods=['GET'])
+    def wordcloud():
+        if request.method == "GET":
+            db = get_db()
+            try:
+                test_grade = db.execute('SELECT id as value ,username as name FROM user ').fetchall()
+                return jsonify(list(map(
+                    lambda item: dict(zip(item.keys(), tuple(item))),
+                    test_grade)))
+            except Exception as e:
+                return jsonify({"error": str(e)})
+
     @app.route('/inspect', methods=['POST', 'GET'])
     def inspect():
         if request.method == 'POST':
