@@ -43,7 +43,7 @@ def create_app(test_config=None):
         return 'here is nothing to show.'
 
     @app.route('/inspect/time', methods=["GET"])
-    def time():
+    def mytime():
         end = 1558713599
         now = int(time.time())
         res = int((end - now) / (end - 1558350000) * 100)
