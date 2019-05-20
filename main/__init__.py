@@ -48,7 +48,7 @@ def create_app(test_config=None):
             num = db.execute('''
                         select count(distinct id_tag) as value from user
                         ''').fetchone()
-            return jsonify(list({"name": "参赛人数", "value": num[0], "prefix": "共", "suffix": "人"}))
+            return jsonify([{"name": "参赛人数", "value": num[0], "prefix": "共", "suffix": "人"}])
         except Exception as e:
             return jsonify({"error": str(e)})
 
