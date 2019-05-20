@@ -41,6 +41,17 @@ def create_app(test_config=None):
     def index():
         return 'here is nothing to show.'
 
+    @app.route('/inspect/gradenum', methods=['GET'])
+    def gradenum():
+        db = get_db()
+        try:
+            num = db.execute('''
+                                select count(id) as value from test
+                                ''').fetchone()
+            return jsonify([{"name": "判题次数", "value": num[0], "prefix": "共", "suffix": "次"}])
+        except Exception as e:
+            return jsonify({"error": str(e)})
+
     @app.route('/inspect/usernum', methods=['GET'])
     def usernum():
         db = get_db()
