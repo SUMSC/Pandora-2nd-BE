@@ -114,13 +114,13 @@ def create_app(test_config=None):
 
             try:
                 db.execute("""INSERT INTO test(user_id, test_status, error_log,repo) VALUES (?, ?, ? ,?)""",
-                           (uid, data.get('test_status', default=0), data.get('error_log'), data.get('repo')))
+                           (uid, data.get('test_status'), data.get('error_log'), data.get('repo')))
                 db.commit()
                 return jsonify({'message': 'success'})
             except Exception as e:
                 db.rollback()
                 print(e)
-                return jsonify({'error': 'insert error' + str(e)})
+                return jsonify({'error': 'insert error'})
 
     @app.route('/user', methods=['GET', 'POST', 'PUT'])
     def user():

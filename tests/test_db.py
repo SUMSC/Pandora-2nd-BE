@@ -60,28 +60,32 @@ def test_post_grade(client):
     res = client.post('/grade', headers={'X-DB-Auth': 'changeit'}, json={
         "id_tag": "333",
         "test_status": "passed",
-        "error_log": "ok"
+        "error_log": "ok",
+        "repo": "https://teset.git"
     })
     assert res.json.get('message') == 'success'
 
     res = client.post('/grade', headers={'X-DB-Auth': 'wrong'}, json={
         "id_tag": "333",
         "test_status": "passed",
-        "error_log": "ok"
+        "error_log": "ok",
+        "repo": "https://teset.git"
     })
     assert res.json.get('error') == 'missing header'
 
     res = client.post('/grade', json={
         "id_tag": "333",
         "test_status": "passed",
-        "error_log": "ok"
+        "error_log": "ok",
+        "repo": "https://teset.git"
     })
     assert res.json.get('error') == 'missing header'
 
     res = client.post('/grade', headers={'X-DB-Auth': 'changeit'}, json={
         "id_tag": "wrong",
         "test_status": "passed",
-        "error_log": "ok"
+        "error_log": "ok",
+        "repo": "https://teset.git"
     })
     assert res.json.get('error') == 'no such user'
 
