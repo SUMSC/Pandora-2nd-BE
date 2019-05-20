@@ -41,7 +41,7 @@ def create_app(test_config=None):
     def index():
         return 'here is nothing to show.'
 
-    @app.route('inspect/passratio', methods=['GET'])
+    @app.route('/inspect/passratio', methods=['GET'])
     def passratio():
         if request.method == "GET":
             db = get_db()
