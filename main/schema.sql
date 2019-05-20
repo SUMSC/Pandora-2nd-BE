@@ -17,6 +17,6 @@ CREATE TABLE test
     test_status TEXT      NOT NULL,
     test_grade  TEXT      NOT NULL,
     error_log   TEXT      NOT NULL,
-    repo        TEXT UNIQUE,
+    repo        TEXT,
     FOREIGN KEY (user_id) REFERENCES user (id)
 );
