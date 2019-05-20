@@ -68,6 +68,7 @@ def create_app(test_config=None):
                     where test.user_id = user.id
                     order by test_grade asc)
                     group by id_tag
+                    order by test_grade desc
                     ''').fetchall()
                 return jsonify(list(map(
                     lambda item: dict(zip(item.keys(), tuple(item))),
