@@ -113,9 +113,10 @@ def create_app(test_config=None):
                 return jsonify({'error': 'no such user'})
 
             try:
-                db.execute("""INSERT INTO test(user_id, test_status, test_grade,error_log,repo) VALUES (?, ?, ? ,?)""",
-                           (uid, data.get('test_status'), data.get('test_grade'), data.get('error_log'),
-                            data.get('repo')))
+                db.execute(
+                    """INSERT INTO test(user_id, test_status, test_grade,error_log,repo) VALUES (?, ?, ? ,?,?)""",
+                    (uid, data.get('test_status'), data.get('test_grade'), data.get('error_log'),
+                     data.get('repo')))
                 db.commit()
                 return jsonify({'message': 'success'})
             except Exception as e:
