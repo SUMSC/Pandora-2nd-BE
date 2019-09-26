@@ -152,9 +152,12 @@ def create_app(test_config=None):
                     group by id_tag
                     order by test_grade desc
                     ''').fetchall()
-                return jsonify(list(map(
-                    lambda item: dict(zip(item.keys(), tuple(item))),
-                    test_grade)))
+                return jsonify(list(
+                    map(
+                        lambda item: dict(zip(item.keys(), tuple(item))),
+                        test_grade
+                    )
+                ))
 
             except Exception as e:
                 tb = sys.exc_info()[2]
